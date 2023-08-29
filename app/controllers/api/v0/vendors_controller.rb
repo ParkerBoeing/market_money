@@ -17,4 +17,44 @@ class Api::V0::VendorsController < ApplicationController
       render json: { errors: [{ detail: e.message }] }, status: :not_found
     end
   end
+
+  # def create
+  #   begin
+  #     vendor = Vendor.create(vendor_params)
+  #     render json: VendorSerializer.new(vendor)
+  #   rescue => e
+  #     render json: { errors: [{ detail: e.message }] }, status: 400
+  #   end
+  # end
+
+  # def create
+  #   vendor = Vendor.new(vendor_params)
+  #   if vendor.save
+  #     render json: VendorSerializer.new(vendor), status: :created
+  #   else
+  #     render json: { errors: vendor.errors.full_messages }, status: :unprocessable_entity
+  #   end
+  # rescue => e
+  #   render json: { errors: [{ detail: e.message }] }, status: :bad_request
+  # end
+
+  def create
+    vendor = Vendor.new(vendor_params)
+    if vendor.save
+      render json: VendorSerializer.new(vendor), status: :created
+    else
+      render json: { errors: vendor.errors }, status: 400
+    end
+  end
+  
+
+  private
+  def vendor_params
+    params.require(:vendor).permit(:name,
+                                   :description,
+                                   :contact_name,
+                                   :contact_phone,
+                                   :credit_accepted
+    )
+  end
 end
