@@ -14,7 +14,7 @@
       <img src="./assets/0.12.3/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" class="hide">
-      <div class="timestamp">Generated <abbr class="timeago" title="2023-08-28T21:09:26-06:00">2023-08-28T21:09:26-06:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2023-08-28T21:49:25-06:00">2023-08-28T21:49:25-06:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
@@ -29,8 +29,8 @@
      </span>
      covered at
      <span class="covered_strength">
-       <span class="yellow">
-         1.0
+       <span class="green">
+         2.18
        </span>
     </span> hits/line
     )
@@ -39,12 +39,12 @@
   <a name="AllFiles"></a>
 
   <div>
-    <b>8</b> files in total.
+    <b>14</b> files in total.
   </div>
 
   <div class="t-line-summary">
-    <b>41</b> relevant lines,
-    <span class="green"><b>41</b> lines covered</span> and
+    <b>68</b> relevant lines,
+    <span class="green"><b>68</b> lines covered</span> and
     <span class="red"><b>0</b> lines missed. </span>
     (<span class="green">
   100.0%
@@ -69,6 +69,50 @@
         </tr>
       </thead>
       <tbody>
+        
+          <tr class="t-file">
+            <td class="strong t-file__name"><a href="#b0bae6fed4bc2e654dc918f65548ce5223031201" class="src_link" title="app/controllers/api/v0/markets_controller.rb">app/controllers/api/v0/markets_controller.rb</a></td>
+            <td class="green strong cell--number t-file__coverage">100.00 %</td>
+            <td class="cell--number">5</td>
+            <td class="cell--number">3</td>
+            <td class="cell--number">3</td>
+            <td class="cell--number">0</td>
+            <td class="cell--number">1.00</td>
+            
+          </tr>
+        
+          <tr class="t-file">
+            <td class="strong t-file__name"><a href="#6fe8e19d49903d01901bc00b7535efab1effe56a" class="src_link" title="app/controllers/application_controller.rb">app/controllers/application_controller.rb</a></td>
+            <td class="green strong cell--number t-file__coverage">100.00 %</td>
+            <td class="cell--number">2</td>
+            <td class="cell--number">1</td>
+            <td class="cell--number">1</td>
+            <td class="cell--number">0</td>
+            <td class="cell--number">1.00</td>
+            
+          </tr>
+        
+          <tr class="t-file">
+            <td class="strong t-file__name"><a href="#8335f99508a247470aa0b327363bc6f80f620d14" class="src_link" title="app/models/application_record.rb">app/models/application_record.rb</a></td>
+            <td class="green strong cell--number t-file__coverage">100.00 %</td>
+            <td class="cell--number">3</td>
+            <td class="cell--number">2</td>
+            <td class="cell--number">2</td>
+            <td class="cell--number">0</td>
+            <td class="cell--number">1.00</td>
+            
+          </tr>
+        
+          <tr class="t-file">
+            <td class="strong t-file__name"><a href="#809b895777c4725c0a08b582e83170156dcde00d" class="src_link" title="app/models/market.rb">app/models/market.rb</a></td>
+            <td class="green strong cell--number t-file__coverage">100.00 %</td>
+            <td class="cell--number">3</td>
+            <td class="cell--number">1</td>
+            <td class="cell--number">1</td>
+            <td class="cell--number">0</td>
+            <td class="cell--number">1.00</td>
+            
+          </tr>
         
           <tr class="t-file">
             <td class="strong t-file__name"><a href="#c859ac317dae0a3c256c467aeb5dcc3a77f33973" class="src_link" title="config/application.rb">config/application.rb</a></td>
@@ -150,9 +194,31 @@
           <tr class="t-file">
             <td class="strong t-file__name"><a href="#219eb16767819ad5b628cdc21c0f394231643e32" class="src_link" title="config/routes.rb">config/routes.rb</a></td>
             <td class="green strong cell--number t-file__coverage">100.00 %</td>
-            <td class="cell--number">6</td>
-            <td class="cell--number">1</td>
-            <td class="cell--number">1</td>
+            <td class="cell--number">12</td>
+            <td class="cell--number">4</td>
+            <td class="cell--number">4</td>
+            <td class="cell--number">0</td>
+            <td class="cell--number">1.00</td>
+            
+          </tr>
+        
+          <tr class="t-file">
+            <td class="strong t-file__name"><a href="#ac2365580ae8cdf5902e8067332156a362d29cd0" class="src_link" title="spec/factories/markets.rb">spec/factories/markets.rb</a></td>
+            <td class="green strong cell--number t-file__coverage">100.00 %</td>
+            <td class="cell--number">12</td>
+            <td class="cell--number">10</td>
+            <td class="cell--number">10</td>
+            <td class="cell--number">0</td>
+            <td class="cell--number">9.00</td>
+            
+          </tr>
+        
+          <tr class="t-file">
+            <td class="strong t-file__name"><a href="#e27e9a562673fe8d22541bfb8ac45a62c186df57" class="src_link" title="spec/requests/api/v0/markets_request_spec.rb">spec/requests/api/v0/markets_request_spec.rb</a></td>
+            <td class="green strong cell--number t-file__coverage">100.00 %</td>
+            <td class="cell--number">12</td>
+            <td class="cell--number">7</td>
+            <td class="cell--number">7</td>
             <td class="cell--number">0</td>
             <td class="cell--number">1.00</td>
             
@@ -174,6 +240,273 @@
       </div>
 
       <div class="source_files">
+      
+        <div class="source_table" id="b0bae6fed4bc2e654dc918f65548ce5223031201">
+  <div class="header">
+    <h3>app/controllers/api/v0/markets_controller.rb</h3>
+    <h4>
+      <span class="green">
+  100.0%
+</span>
+
+      lines covered
+    </h4>
+
+    
+
+    <div class="t-line-summary">
+      <b>3</b> relevant lines.
+      <span class="green"><b>3</b> lines covered</span> and
+      <span class="red"><b>0</b> lines missed.</span>
+    </div>
+
+    
+
+  </div>
+
+  <pre>
+    <ol>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="1">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">class Api::V0::MarketsController &lt; ApplicationController</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="2">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">  def index</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="3">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">    render json: Market.all</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="4">
+            
+            
+
+            
+
+            <code class="ruby">  end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="5">
+            
+            
+
+            
+
+            <code class="ruby">end</code>
+          </li>
+        </div>
+      
+    </ol>
+  </pre>
+</div>
+
+      
+        <div class="source_table" id="6fe8e19d49903d01901bc00b7535efab1effe56a">
+  <div class="header">
+    <h3>app/controllers/application_controller.rb</h3>
+    <h4>
+      <span class="green">
+  100.0%
+</span>
+
+      lines covered
+    </h4>
+
+    
+
+    <div class="t-line-summary">
+      <b>1</b> relevant lines.
+      <span class="green"><b>1</b> lines covered</span> and
+      <span class="red"><b>0</b> lines missed.</span>
+    </div>
+
+    
+
+  </div>
+
+  <pre>
+    <ol>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="1">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">class ApplicationController &lt; ActionController::API</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="2">
+            
+            
+
+            
+
+            <code class="ruby">end</code>
+          </li>
+        </div>
+      
+    </ol>
+  </pre>
+</div>
+
+      
+        <div class="source_table" id="8335f99508a247470aa0b327363bc6f80f620d14">
+  <div class="header">
+    <h3>app/models/application_record.rb</h3>
+    <h4>
+      <span class="green">
+  100.0%
+</span>
+
+      lines covered
+    </h4>
+
+    
+
+    <div class="t-line-summary">
+      <b>2</b> relevant lines.
+      <span class="green"><b>2</b> lines covered</span> and
+      <span class="red"><b>0</b> lines missed.</span>
+    </div>
+
+    
+
+  </div>
+
+  <pre>
+    <ol>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="1">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">class ApplicationRecord &lt; ActiveRecord::Base</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="2">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">  primary_abstract_class</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="3">
+            
+            
+
+            
+
+            <code class="ruby">end</code>
+          </li>
+        </div>
+      
+    </ol>
+  </pre>
+</div>
+
+      
+        <div class="source_table" id="809b895777c4725c0a08b582e83170156dcde00d">
+  <div class="header">
+    <h3>app/models/market.rb</h3>
+    <h4>
+      <span class="green">
+  100.0%
+</span>
+
+      lines covered
+    </h4>
+
+    
+
+    <div class="t-line-summary">
+      <b>1</b> relevant lines.
+      <span class="green"><b>1</b> lines covered</span> and
+      <span class="red"><b>0</b> lines missed.</span>
+    </div>
+
+    
+
+  </div>
+
+  <pre>
+    <ol>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="1">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">class Market &lt; ApplicationRecord</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="2">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="3">
+            
+            
+
+            
+
+            <code class="ruby">end</code>
+          </li>
+        </div>
+      
+    </ol>
+  </pre>
+</div>
+
       
         <div class="source_table" id="c859ac317dae0a3c256c467aeb5dcc3a77f33973">
   <div class="header">
@@ -2034,8 +2367,8 @@
     
 
     <div class="t-line-summary">
-      <b>1</b> relevant lines.
-      <span class="green"><b>1</b> lines covered</span> and
+      <b>4</b> relevant lines.
+      <span class="green"><b>4</b> lines covered</span> and
       <span class="red"><b>0</b> lines missed.</span>
     </div>
 
@@ -2103,6 +2436,398 @@
       
         <div>
           <li class="never" data-hits="" data-linenumber="6">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="7">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">  namespace :api do</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="8">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">    namespace :v0 do</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="9">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      resources :markets, only: [:index]</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="10">
+            
+            
+
+            
+
+            <code class="ruby">    end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="11">
+            
+            
+
+            
+
+            <code class="ruby">  end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="12">
+            
+            
+
+            
+
+            <code class="ruby">end</code>
+          </li>
+        </div>
+      
+    </ol>
+  </pre>
+</div>
+
+      
+        <div class="source_table" id="ac2365580ae8cdf5902e8067332156a362d29cd0">
+  <div class="header">
+    <h3>spec/factories/markets.rb</h3>
+    <h4>
+      <span class="green">
+  100.0%
+</span>
+
+      lines covered
+    </h4>
+
+    
+
+    <div class="t-line-summary">
+      <b>10</b> relevant lines.
+      <span class="green"><b>10</b> lines covered</span> and
+      <span class="red"><b>0</b> lines missed.</span>
+    </div>
+
+    
+
+  </div>
+
+  <pre>
+    <ol>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="1">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">FactoryBot.define do</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="2">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">  factory :market do</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="11" data-linenumber="3">
+            <span class="hits">11</span>
+            
+
+            
+
+            <code class="ruby">    name { Faker::Company.name }  </code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="11" data-linenumber="4">
+            <span class="hits">11</span>
+            
+
+            
+
+            <code class="ruby">    street { Faker::Address.street_address }  </code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="11" data-linenumber="5">
+            <span class="hits">11</span>
+            
+
+            
+
+            <code class="ruby">    city { Faker::Address.city }  </code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="11" data-linenumber="6">
+            <span class="hits">11</span>
+            
+
+            
+
+            <code class="ruby">    county { Faker::Address.community }  </code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="11" data-linenumber="7">
+            <span class="hits">11</span>
+            
+
+            
+
+            <code class="ruby">    state { Faker::Address.state }  </code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="11" data-linenumber="8">
+            <span class="hits">11</span>
+            
+
+            
+
+            <code class="ruby">    zip { Faker::Address.zip }  </code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="11" data-linenumber="9">
+            <span class="hits">11</span>
+            
+
+            
+
+            <code class="ruby">    lat { Faker::Address.latitude }  </code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="11" data-linenumber="10">
+            <span class="hits">11</span>
+            
+
+            
+
+            <code class="ruby">    lon { Faker::Address.longitude }</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="11">
+            
+            
+
+            
+
+            <code class="ruby">  end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="12">
+            
+            
+
+            
+
+            <code class="ruby">end</code>
+          </li>
+        </div>
+      
+    </ol>
+  </pre>
+</div>
+
+      
+        <div class="source_table" id="e27e9a562673fe8d22541bfb8ac45a62c186df57">
+  <div class="header">
+    <h3>spec/requests/api/v0/markets_request_spec.rb</h3>
+    <h4>
+      <span class="green">
+  100.0%
+</span>
+
+      lines covered
+    </h4>
+
+    
+
+    <div class="t-line-summary">
+      <b>7</b> relevant lines.
+      <span class="green"><b>7</b> lines covered</span> and
+      <span class="red"><b>0</b> lines missed.</span>
+    </div>
+
+    
+
+  </div>
+
+  <pre>
+    <ol>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="1">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">require &#39;rails_helper&#39;</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="2">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="3">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">describe &quot;Markets API&quot; do</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="4">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">  it &quot;sends a list of markets&quot; do</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="5">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">    create_list(:market, 10)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="6">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="7">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">    get &#39;/api/v0/markets&#39;</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="8">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="9">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">    expect(response).to be_successful</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="10">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">    expect(JSON.parse(response.body).size).to eq(10)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="11">
+            
+            
+
+            
+
+            <code class="ruby">  end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="12">
             
             
 
