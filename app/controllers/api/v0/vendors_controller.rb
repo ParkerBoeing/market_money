@@ -18,26 +18,6 @@ class Api::V0::VendorsController < ApplicationController
     end
   end
 
-  # def create
-  #   begin
-  #     vendor = Vendor.create(vendor_params)
-  #     render json: VendorSerializer.new(vendor)
-  #   rescue => e
-  #     render json: { errors: [{ detail: e.message }] }, status: 400
-  #   end
-  # end
-
-  # def create
-  #   vendor = Vendor.new(vendor_params)
-  #   if vendor.save
-  #     render json: VendorSerializer.new(vendor), status: :created
-  #   else
-  #     render json: { errors: vendor.errors.full_messages }, status: :unprocessable_entity
-  #   end
-  # rescue => e
-  #   render json: { errors: [{ detail: e.message }] }, status: :bad_request
-  # end
-
   def create
     vendor = Vendor.new(vendor_params)
     if vendor.save
@@ -55,6 +35,16 @@ class Api::V0::VendorsController < ApplicationController
       else
         render json: { errors: vendor.errors }, status: 400
       end
+    rescue ActiveRecord::RecordNotFound => e
+      render json: { errors: [{ detail: e.message }] }, status: :not_found
+    end
+  end
+
+  def destroy
+    begin
+      vendor = Vendor.find(params[:id])
+      vendor.destroy
+      render json: { message: 'Vendor successfully deleted.' }, status: :no_content
     rescue ActiveRecord::RecordNotFound => e
       render json: { errors: [{ detail: e.message }] }, status: :not_found
     end
