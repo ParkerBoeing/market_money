@@ -7,6 +7,8 @@ describe "Markets API" do
     get '/api/v0/markets'
 
     expect(response).to be_successful
-    expect(JSON.parse(response.body).size).to eq(10)
+    parsed_body = JSON.parse(response.body)
+    require 'pry'; binding.pry
+    expect(parsed_body.size).to eq(10)
   end
 end
