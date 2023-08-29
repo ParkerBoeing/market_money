@@ -1,15 +1,20 @@
 class Api::V0::VendorsController < ApplicationController
   
   def index
-    render json: VendorSerializer.new(Vendor.all)
+    begin
+      market = Market.find(params[:market_id])
+      render json: VendorSerializer.new(market.vendors)
+    rescue ActiveRecord::RecordNotFound => e
+      render json: { errors: [{ detail: e.message }] }, status: :not_found
+    end
   end
 
   # def show
-  #  vendor = Vendor.find_by(id: params[:id])
-  #  if market.nil?
-  #     render json: { errors: "The ID provided cannot be found" }, status: :not_found
-  #   else
+  #   begin
+  #     market = Market.find(params[:id])
   #     render json: MarketSerializer.new(market)
+  #   rescue ActiveRecord::RecordNotFound => e
+  #     render json: { errors: [{ detail: e.message }] }, status: :not_found
   #   end
   # end
 end
