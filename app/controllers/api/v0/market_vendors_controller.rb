@@ -16,6 +16,16 @@ class Api::V0::MarketVendorsController < ApplicationController
     end
   end
 
+  def destroy
+    begin
+      market_vendor = MarketVendor.find_by(market_vendor_params)
+      market_vendor.destroy
+      render json: { message: 'MarketVendor successfully deleted.' }, status: :no_content
+    rescue ActiveRecord::RecordNotFound => e
+      render json: { errors: [{ detail: e.message }] }, status: :not_found
+    end
+  end
+
   private
   def market_vendor_params
     params.require(:market_vendor).permit(:market_id,
