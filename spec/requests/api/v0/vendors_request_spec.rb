@@ -90,4 +90,31 @@ describe "Markets API" do
       expect(parsed_response).to eq({"errors"=>[{"detail"=>"Couldn't find Vendor with 'id'=9999999"}]})
     end
   end
+
+  describe "create vendor" do
+    it "happy path" do
+      vendor_params = ({
+        name: 'Apple',
+        description: 'Take over the world',
+        contact_name: 'Stevejobs@gmail.com',
+        contact_phone: '999-999-9999',
+        credit_accepted: true
+      })
+      headers = {"CONTENT_TYPE" => "application/json"}
+
+      post "/api/v0/vendors", headers: headers, params: JSON.generate(vendor: vendor_params)
+      created_vendor = Vendor.last
+
+      expect(response).to be_successful
+      expect(created_vendor.name).to eq(vendor_params[:name])
+      expect(created_vendor.description).to eq(vendor_params[:description])
+      expect(created_vendor.contact_name).to eq(vendor_params[:contact_name])
+      expect(created_vendor.contact_phone).to eq(vendor_params[:contact_phone])
+      expect(created_vendor.credit_accepted).to eq(vendor_params[:credit_accepted])
+    end
+
+    it "sad path" do
+
+    end
+  end
 end
