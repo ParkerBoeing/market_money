@@ -8,7 +8,6 @@ describe "Markets API" do
 
     expect(response).to be_successful
     parsed_body = JSON.parse(response.body)
-    require 'pry'; binding.pry
-    expect(parsed_body.size).to eq(10)
+    expect(parsed_body["data"].size).to eq(10)
   end
 end
