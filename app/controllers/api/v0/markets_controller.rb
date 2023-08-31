@@ -55,7 +55,28 @@ class Api::V0::MarketsController < ApplicationController
   end 
 
   def nearest_atms
-    market = Market.find(params[:market_id])
-    NearestAtmFacade.nearby_atms(market)
+    begin
+      market = Market.find(params[:market_id])
+      nearby_atms = NearestAtmFacade.nearby_atms(market)
+
+      atms_json = nearby_atms.map do |atm|
+        {
+          id: nil,
+          type: 'atm',
+          attributes: {
+            name: atm.name,
+            address: atm.address,
+            lat: atm.lat,
+            lon: atm.lon,
+            distance: atm.distance
+          }
+        }
+      end
+
+      render json: { data: atms_json }, status: :ok
+
+    rescue ActiveRecord::RecordNotFound => e
+      render json: { errors: [{ detail: e.message }] }, status: :not_found
+    end
   end
 end

@@ -1,7 +1,7 @@
 class NearestAtmService
 
   def nearest_atms(market)
-    get_url("?key=#{ENV['TOMTOM_API_KEY']}&lat=#{market.lat}&lon=#{market.lon}&category=ATM")
+    get_url("?key=#{Rails.application.credentials.tomtom_api_key[:key]}&lat=#{market.lat}&lon=#{market.lon}&categorySet=7397")
   end
 
   def get_url(url)
