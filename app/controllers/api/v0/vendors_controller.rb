@@ -20,6 +20,11 @@ class Api::V0::VendorsController < ApplicationController
 
   def create
     vendor = Vendor.new(vendor_params)
+
+    unless [true, false].include?(params[:vendor][:credit_accepted])
+      render json: { errors: "Credit accepted must be a boolean" }, status: 400
+    end
+
     if vendor.save
       render json: VendorSerializer.new(vendor), status: :created
     else

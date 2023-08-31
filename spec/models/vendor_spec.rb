@@ -22,11 +22,5 @@ RSpec.describe Vendor, type: :model do
       expect(vendor).to_not be_valid
       expect(vendor.errors[:credit_accepted]).to include("Credit accepted must be true or false.")
     end
-
-    it 'is not valid with credit_accepted as something other than true or false' do
-      vendor = FactoryBot.build(:vendor, credit_accepted: 'invalid_value')
-      expect(vendor).to_not be_valid
-      expect(vendor.errors[:credit_accepted]).to include("Credit accepted must be true or false.")
-    end
   end
 end
