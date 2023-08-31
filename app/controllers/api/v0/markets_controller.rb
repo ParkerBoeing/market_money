@@ -51,7 +51,11 @@ class Api::V0::MarketsController < ApplicationController
     if params[:city] && params[:name] && !params[:state]
       render json: { errors: [{ detail: "Cannot send in just city and name params" }] }, status: 422 and return
     end
-
     render json: MarketSerializer.new(markets)
   end 
+
+  def nearest_atms
+    market = Market.find(params[:market_id])
+    NearestAtmFacade.nearby_atms(market)
+  end
 end

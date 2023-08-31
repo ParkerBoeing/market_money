@@ -134,6 +134,15 @@ describe "Markets API" do
         expect(data.sample["attributes"]["city"]).to eq("NYC")
       end
 
+      it "returns markets that match the state and name" do
+        get "/api/v0/markets/search?state=NewYork&name=MarketThree"
+        expect(response).to have_http_status(200)
+        data = JSON.parse(response.body)["data"]
+        expect(data.size).to eq(1)
+        expect(data.sample["attributes"]["state"]).to eq("NewYork")
+        expect(data.sample["attributes"]["name"]).to eq("MarketThree")
+      end
+
       it "returns markets that match the state, city and name" do
         get "/api/v0/markets/search?state=NewYork&city=NYC&name=MarketOne"
         expect(response).to have_http_status(200)

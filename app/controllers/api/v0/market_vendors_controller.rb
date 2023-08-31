@@ -29,11 +29,4 @@ class Api::V0::MarketVendorsController < ApplicationController
       render json: { errors: [{ detail: e.message }] }, status: :not_found
     end
   end
-
-  private
-  def market_vendor_params
-    params.require(:market_vendor).permit(:market_id,
-                                          :vendor_id
-                                          )
-  end
 end

@@ -168,7 +168,7 @@ describe "Markets API" do
         description: 'Take over the world',
         contact_name: 'Stevejobs@gmail.com',
         contact_phone: '999-999-9999',
-        credit_accepted: {}
+        credit_accepted: Hash.new
       })
       headers = {"CONTENT_TYPE" => "application/json"}
 
