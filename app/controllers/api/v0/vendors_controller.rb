@@ -20,15 +20,26 @@ class Api::V0::VendorsController < ApplicationController
 
   def create
     vendor = Vendor.new(vendor_params)
-
-    unless [true, false].include?(params[:vendor][:credit_accepted])
-      render json: { errors: "Credit accepted must be a boolean" }, status: 400
-    end
-
-    if vendor.save
+    
+    if (params[:vendor][:credit_accepted]).is_a?(String)
+      render json: { errors: [{ detail: "Credit accepted must be a boolean" }] }, status: 400
+      return
+    elsif (params[:vendor][:credit_accepted]).is_a?(Integer)
+      render json: { errors: [{ detail: "Credit accepted must be a boolean" }] }, status: 400
+      return
+    elsif (params[:vendor][:credit_accepted]).is_a?(Float)
+      render json: { errors: [{ detail: "Credit accepted must be a boolean" }] }, status: 400
+      return
+    elsif (params[:vendor][:credit_accepted]).is_a?(Hash)
+      render json: { errors: [{ detail: "Credit accepted must be a boolean" }] }, status: 400
+      return
+    elsif (params[:vendor][:credit_accepted]).is_a?(Array)
+      render json: { errors: [{ detail: "Credit accepted must be a boolean" }] }, status: 400
+      return
+    elsif vendor.save
       render json: VendorSerializer.new(vendor), status: :created
     else
-      render json: { errors: vendor.errors }, status: 400
+      render json: { errors: [{ detail: vendor.errors }] }, status: 400
     end
   end
   
@@ -38,7 +49,7 @@ class Api::V0::VendorsController < ApplicationController
       if vendor.update(vendor_params)
         render json: VendorSerializer.new(vendor)
       else
-        render json: { errors: vendor.errors }, status: 400
+        render json: { errors: [{ detail: vendor.errors }] }, status: 400
       end
     rescue ActiveRecord::RecordNotFound => e
       render json: { errors: [{ detail: e.message }] }, status: :not_found

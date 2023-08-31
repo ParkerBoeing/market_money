@@ -113,8 +113,44 @@ describe "Markets API" do
       expect(created_vendor.credit_accepted).to eq(vendor_params[:credit_accepted])
     end
 
-    it "sad path" do
+    it "sad path for booleans" do
+      vendor_params = ({
+        name: 'Apple',
+        description: 'Take over the world',
+        contact_name: 'Stevejobs@gmail.com',
+        contact_phone: '999-999-9999',
+        credit_accepted: "bananas"
+      })
+      headers = {"CONTENT_TYPE" => "application/json"}
 
+      post "/api/v0/vendors", headers: headers, params: JSON.generate(vendor: vendor_params)
+      created_vendor = Vendor.last
+      expect(response).to have_http_status(400)
+
+      parsed_response = JSON.parse(response.body)
+
+      expect(parsed_response).to eq({"errors"=>[{"detail"=>"Credit accepted must be a boolean"}]})
+    end
+
+    it "sad path for other validations" do
+      vendor_params = ({
+        name: 'Apple',
+        description: 'Take over the world',
+        contact_name: 'Stevejobs@gmail.com',
+        contact_phone: '999-999-9999',
+        credit_accepted: nil
+      })
+      headers = {"CONTENT_TYPE" => "application/json"}
+
+      post "/api/v0/vendors", headers: headers, params: JSON.generate(vendor: vendor_params)
+      created_vendor = Vendor.last
+      expect(response).to have_http_status(400)
+
+      parsed_response = JSON.parse(response.body)
+
+      expect(parsed_response).to eq({"errors"=>[{"detail"=>{"credit_accepted"=>
+                                    ["is not included in the list", "Credit accepted must be true or false."
+                                    ]}}]})
     end
   end
 end
