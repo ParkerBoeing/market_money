@@ -134,11 +134,10 @@ describe "Markets API" do
 
     it "sad path for other validations" do
       vendor_params = ({
-        name: 'Apple',
         description: 'Take over the world',
         contact_name: 'Stevejobs@gmail.com',
         contact_phone: '999-999-9999',
-        credit_accepted: nil
+        credit_accepted: true
       })
       headers = {"CONTENT_TYPE" => "application/json"}
 
@@ -147,10 +146,48 @@ describe "Markets API" do
       expect(response).to have_http_status(400)
 
       parsed_response = JSON.parse(response.body)
+      expect(parsed_response).to eq({"errors"=>[{"detail"=>{"name"=>["can't be blank"]}}]})
+    end
+  end
 
-      expect(parsed_response).to eq({"errors"=>[{"detail"=>{"credit_accepted"=>
-                                    ["is not included in the list", "Credit accepted must be true or false."
-                                    ]}}]})
+  describe "vendor update" do
+    it "happy path" do
+      id = create(:vendor).id
+      previous_name = Vendor.last.name
+      vendor_params = { name: "X" }
+      headers = {"CONTENT_TYPE" => "application/json"}
+
+      patch "/api/v0/vendors/#{id}", headers: headers, params: JSON.generate({vendor: vendor_params})
+      vendor = Vendor.find_by(id: id)
+
+      expect(response).to be_successful
+      expect(vendor.name).to_not eq(previous_name)
+      expect(vendor.name).to eq("X")
+    end
+
+    it "sad path for blank fields" do
+      id = create(:vendor).id
+      previous_name = Vendor.last.name
+      vendor_params = { name: "" }
+      headers = {"CONTENT_TYPE" => "application/json"}
+      patch "/api/v0/vendors/#{id}", headers: headers, params: JSON.generate({vendor: vendor_params})
+
+      expect(response).to have_http_status(400)
+      parsed_response = JSON.parse(response.body)
+      require 'pry'; binding.pry
+
+      expect(parsed_response).to eq({"errors"=>[{"detail"=>{"name"=>["can't be blank"]}}]})
+    end
+
+    it "sad path for unfound vendor" do
+      vendor_params = { name: "X" }
+      patch "/api/v0/vendors/9999999", headers: headers, params: JSON.generate({vendor: vendor_params})
+
+      expect(response).to have_http_status(404)
+
+      parsed_response = JSON.parse(response.body)
+
+      expect(parsed_response).to eq({"errors"=>[{"detail"=>"Couldn't find Vendor with 'id'=9999999"}]})
     end
   end
 end
