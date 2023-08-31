@@ -108,13 +108,85 @@ describe "Markets API" do
       expect(created_vendor.credit_accepted).to eq(vendor_params[:credit_accepted])
     end
 
-    it "sad path for booleans" do
+    it "sad path for strings" do
       vendor_params = ({
         name: 'Apple',
         description: 'Take over the world',
         contact_name: 'Stevejobs@gmail.com',
         contact_phone: '999-999-9999',
         credit_accepted: "bananas"
+      })
+      headers = {"CONTENT_TYPE" => "application/json"}
+
+      post "/api/v0/vendors", headers: headers, params: JSON.generate(vendor: vendor_params)
+      created_vendor = Vendor.last
+      expect(response).to have_http_status(400)
+      parsed_response = JSON.parse(response.body)
+
+      expect(parsed_response).to eq({"errors"=>[{"detail"=>"Credit accepted must be a boolean"}]})
+    end
+
+    it "sad path for ints" do
+      vendor_params = ({
+        name: 'Apple',
+        description: 'Take over the world',
+        contact_name: 'Stevejobs@gmail.com',
+        contact_phone: '999-999-9999',
+        credit_accepted: 999
+      })
+      headers = {"CONTENT_TYPE" => "application/json"}
+
+      post "/api/v0/vendors", headers: headers, params: JSON.generate(vendor: vendor_params)
+      created_vendor = Vendor.last
+      expect(response).to have_http_status(400)
+      parsed_response = JSON.parse(response.body)
+
+      expect(parsed_response).to eq({"errors"=>[{"detail"=>"Credit accepted must be a boolean"}]})
+    end
+
+    it "sad path for floats" do
+      vendor_params = ({
+        name: 'Apple',
+        description: 'Take over the world',
+        contact_name: 'Stevejobs@gmail.com',
+        contact_phone: '999-999-9999',
+        credit_accepted: 9.99
+      })
+      headers = {"CONTENT_TYPE" => "application/json"}
+
+      post "/api/v0/vendors", headers: headers, params: JSON.generate(vendor: vendor_params)
+      created_vendor = Vendor.last
+      expect(response).to have_http_status(400)
+      parsed_response = JSON.parse(response.body)
+
+      expect(parsed_response).to eq({"errors"=>[{"detail"=>"Credit accepted must be a boolean"}]})
+    end
+
+    it "sad path for hashes" do
+      vendor_params = ({
+        name: 'Apple',
+        description: 'Take over the world',
+        contact_name: 'Stevejobs@gmail.com',
+        contact_phone: '999-999-9999',
+        credit_accepted: {}
+      })
+      headers = {"CONTENT_TYPE" => "application/json"}
+
+      post "/api/v0/vendors", headers: headers, params: JSON.generate(vendor: vendor_params)
+      created_vendor = Vendor.last
+      expect(response).to have_http_status(400)
+      parsed_response = JSON.parse(response.body)
+
+      expect(parsed_response).to eq({"errors"=>[{"detail"=>{"credit_accepted"=>["is not included in the list", "Credit accepted must be true or false."]}}]})
+    end
+
+    it "sad path for arrays" do
+      vendor_params = ({
+        name: 'Apple',
+        description: 'Take over the world',
+        contact_name: 'Stevejobs@gmail.com',
+        contact_phone: '999-999-9999',
+        credit_accepted: []
       })
       headers = {"CONTENT_TYPE" => "application/json"}
 

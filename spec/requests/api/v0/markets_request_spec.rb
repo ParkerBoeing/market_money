@@ -101,4 +101,62 @@ describe "Markets API" do
       expect(parsed_response).to eq({"errors"=>[{"detail"=>"Couldn't find Market with 'id'=9999999"}]})
     end
   end
+
+  describe "search features" do
+    let!(:market1) { create(:market, name: "MarketOne", state: "NewYork", city: "NYC") }
+    let!(:market2) { create(:market, name: "MarketTwo", state: "California", city: "LA") }
+    let!(:market3) { create(:market, name: "MarketThree", state: "NewYork", city: "Buffalo") }
+
+
+    describe "happy paths" do
+      it "returns markets that match the state" do
+        get "/api/v0/markets/search?state=NewYork"
+        expect(response).to have_http_status(200)
+        data = JSON.parse(response.body)["data"]
+        expect(data.size).to eq(2)
+        expect(data.sample["attributes"]["state"]).to eq("NewYork")
+      end
+
+      it "returns markets that match the name" do
+        get "/api/v0/markets/search?name=MarketOne"
+        expect(response).to have_http_status(200)
+        data = JSON.parse(response.body)["data"]
+        expect(data.size).to eq(1)
+        expect(data.sample["attributes"]["name"]).to eq("MarketOne")
+      end
+    
+      it "returns markets that match the state and city" do
+        get "/api/v0/markets/search?state=NewYork&city=NYC"
+        expect(response).to have_http_status(200)
+        data = JSON.parse(response.body)["data"]
+        expect(data.size).to eq(1)
+        expect(data.sample["attributes"]["state"]).to eq("NewYork")
+        expect(data.sample["attributes"]["city"]).to eq("NYC")
+      end
+
+      it "returns markets that match the state, city and name" do
+        get "/api/v0/markets/search?state=NewYork&city=NYC&name=MarketOne"
+        expect(response).to have_http_status(200)
+        data = JSON.parse(response.body)["data"]
+        expect(data.size).to eq(1)
+        expect(data.sample["attributes"]["state"]).to eq("NewYork")
+        expect(data.sample["attributes"]["city"]).to eq("NYC")
+        expect(data.sample["attributes"]["name"]).to eq("MarketOne")
+      end
+    end
+
+    describe "sad paths" do
+      it "returns an error if only city is sent in" do
+        get "/api/v0/markets/search?city=NYC"
+        expect(response).to have_http_status(422)
+        expect(JSON.parse(response.body)["errors"]).to include("detail" => "Cannot send in just city params")
+      end
+
+      it "returns an error if only city and name are sent in" do
+        get "/api/v0/markets/search?city=NYC&name=MarketOne"
+        expect(response).to have_http_status(422)
+        expect(JSON.parse(response.body)["errors"]).to include("detail" => "Cannot send in just city and name params")
+      end
+    end
+  end
 end
