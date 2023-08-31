@@ -3,7 +3,6 @@ require 'rails_helper'
 describe "Markets API" do
   before :each do
     @market = create(:market)
-
     create_list(:vendor, 3, markets: [@market]) 
   end
 
@@ -41,9 +40,7 @@ describe "Markets API" do
 
     it "has a sad path" do
       get '/api/v0/markets/9999999/vendors'
-
       expect(response).to have_http_status(404)
-
       parsed_response = JSON.parse(response.body)
 
       expect(parsed_response).to eq({"errors"=>[{"detail"=>"Couldn't find Market with 'id'=9999999"}]})
@@ -82,9 +79,7 @@ describe "Markets API" do
 
     it "sad path" do
       get '/api/v0/vendors/9999999'
-
       expect(response).to have_http_status(404)
-
       parsed_response = JSON.parse(response.body)
 
       expect(parsed_response).to eq({"errors"=>[{"detail"=>"Couldn't find Vendor with 'id'=9999999"}]})
@@ -126,7 +121,6 @@ describe "Markets API" do
       post "/api/v0/vendors", headers: headers, params: JSON.generate(vendor: vendor_params)
       created_vendor = Vendor.last
       expect(response).to have_http_status(400)
-
       parsed_response = JSON.parse(response.body)
 
       expect(parsed_response).to eq({"errors"=>[{"detail"=>"Credit accepted must be a boolean"}]})
@@ -144,8 +138,8 @@ describe "Markets API" do
       post "/api/v0/vendors", headers: headers, params: JSON.generate(vendor: vendor_params)
       created_vendor = Vendor.last
       expect(response).to have_http_status(400)
-
       parsed_response = JSON.parse(response.body)
+
       expect(parsed_response).to eq({"errors"=>[{"detail"=>{"name"=>["can't be blank"]}}]})
     end
   end
@@ -174,7 +168,6 @@ describe "Markets API" do
 
       expect(response).to have_http_status(400)
       parsed_response = JSON.parse(response.body)
-      require 'pry'; binding.pry
 
       expect(parsed_response).to eq({"errors"=>[{"detail"=>{"name"=>["can't be blank"]}}]})
     end
@@ -182,9 +175,30 @@ describe "Markets API" do
     it "sad path for unfound vendor" do
       vendor_params = { name: "X" }
       patch "/api/v0/vendors/9999999", headers: headers, params: JSON.generate({vendor: vendor_params})
-
       expect(response).to have_http_status(404)
+      parsed_response = JSON.parse(response.body)
 
+      expect(parsed_response).to eq({"errors"=>[{"detail"=>"Couldn't find Vendor with 'id'=9999999"}]})
+    end
+  end
+
+  describe "destroy vendor" do
+    it "happy path" do
+      vendor = create(:vendor)
+      expect(Vendor.last.name).to eq(vendor.name)
+      vendor_count = Vendor.count
+    
+      delete "/api/v0/vendors/#{vendor.id}"
+    
+      expect(response).to be_successful
+      expect(Vendor.count).to eq(vendor_count - 1)
+      expect(Vendor.last.name).to_not eq(vendor.name)
+      expect{Vendor.find(vendor.id)}.to raise_error(ActiveRecord::RecordNotFound)
+    end
+
+    it "sad path" do
+      delete "/api/v0/vendors/9999999"
+      expect(response).to have_http_status(404)
       parsed_response = JSON.parse(response.body)
 
       expect(parsed_response).to eq({"errors"=>[{"detail"=>"Couldn't find Vendor with 'id'=9999999"}]})
